@@ -11,7 +11,6 @@ odoo_username = 'contact@vieuxsinge.com'
 odoo_password = sys.argv[4]
 odoo_db = 'brasserieduvieuxsinge'
 
-from pdb import set_trace; set_trace()
 common = xmlrpclib.ServerProxy('{}/xmlrpc/2/common'.format(odoo_url))
 models = xmlrpclib.ServerProxy('{}/xmlrpc/2/object'.format(odoo_url))
 uid = common.authenticate(odoo_db, odoo_username, odoo_password, {})
