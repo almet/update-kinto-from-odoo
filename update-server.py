@@ -17,7 +17,16 @@ uid = common.authenticate(odoo_db, odoo_username, odoo_password, {})
 ids = models.execute_kw(odoo_db, uid, odoo_password, 'sale.order', 'search', [[['state', '=', 'sale']]])
 product_ids = [p['product_id'][0] for p in models.execute_kw(odoo_db, uid, odoo_password, 'sale.order', 'read', [ids], {'fields': ['product_id']})]
 
-volumes = {	12: 4, 13: 4.5, 14: 18, 15: 16, 16: 9, 17: 8}
+volumes = {
+    12: 4,
+    13: 4.5,
+    14: 18,
+    15: 16,
+    16: 9,
+    17: 8,
+    25: 2.25,
+    26: 2
+}
 new_volume = sum([volumes[p] for p in product_ids])
 
 resp = requests.put(record_url, json={'data': {'liters': new_volume}}, auth=(kinto_user, kinto_password))
