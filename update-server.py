@@ -18,15 +18,20 @@ ids = models.execute_kw(odoo_db, uid, odoo_password, 'sale.order', 'search', [[[
 product_ids = [p['product_id'][0] for p in models.execute_kw(odoo_db, uid, odoo_password, 'sale.order', 'read', [ids], {'fields': ['product_id']})]
 
 volumes = {
-    12: 4,
-    13: 4.5,
+    13: 4.5,    # 6x75
     14: 18,
     15: 16,
     16: 9,
     17: 8,
     25: 2.25,
-    26: 2
+    26: 2,
+    49: 9,      # 12x75cl
+    25: 2.25,   # 3x75cl
+    56: 8,      # 24x33cl
+    36: 2,      # 6x33cl
+    12: 4,      # 12x33cl
+    60: 8       # 24x33cl
 }
-new_volume = sum([volumes[p] for p in product_ids])
+new_volume = sum([volumes.get(p, 0) for p in product_ids])
 
 resp = requests.put(record_url, json={'data': {'liters': new_volume}}, auth=(kinto_user, kinto_password))
