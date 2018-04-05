@@ -30,8 +30,15 @@ volumes = {
     56: 8,      # 24x33cl
     36: 2,      # 6x33cl
     12: 4,      # 12x33cl
-    60: 8       # 24x33cl
+    60: 8,      # 24x33cl
+    59: 8,      # 24x33cl
+    61: 8,      # 24x33cl
+    52: 9       # 12x75cl
 }
+products = [p['product_id'] for p in models.execute_kw(odoo_db, uid, odoo_password, 'sale.order', 'read', [ids], {'fields': ['product_id']})]
+print [p for p in products if p[0] not in volumes.keys()]
+
 new_volume = sum([volumes.get(p, 0) for p in product_ids])
+
 
 resp = requests.put(record_url, json={'data': {'liters': new_volume}}, auth=(kinto_user, kinto_password))
