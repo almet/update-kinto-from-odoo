@@ -33,7 +33,8 @@ volumes = {
     60: 8,      # 24x33cl
     59: 8,      # 24x33cl
     61: 8,      # 24x33cl
-    52: 9       # 12x75cl
+    52: 9,      # 12x75cl
+    54: 9       # 12x75cl
 }
 products = [p['product_id'] for p in models.execute_kw(odoo_db, uid, odoo_password, 'sale.order', 'read', [ids], {'fields': ['product_id']})]
 print [p for p in products if p[0] not in volumes.keys()]
